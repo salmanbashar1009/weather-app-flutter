@@ -20,23 +20,33 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("My Weather App"),
       ),
       body: SafeArea(
-          child: FutureBuilder(
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            WeatherModel? weatherModel = snapshot.data;
-            return  TodaysWeather(weatherModel: weatherModel,);
-          }
-          if (snapshot.hasError) {
+        child: FutureBuilder(
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              WeatherModel? weatherModel = snapshot.data;
+              return SizedBox(
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    TodaysWeather(
+                      weatherModel: weatherModel,
+                    ),
+                  ],
+                ),
+              );
+            }
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text("Error has occurred!"),
+              );
+            }
             return const Center(
-              child: Text("Error has occurred!"),
+              child: CircularProgressIndicator(),
             );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-        future: apiService.getWeatherData("Dhaka"),
-      )),
+          },
+          future: apiService.getWeatherData("Dhaka"),
+        ),
+      ),
     );
   }
 }
