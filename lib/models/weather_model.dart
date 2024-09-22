@@ -87,10 +87,10 @@ class Current {
   double? windKph;
   int? windDegree;
   String? windDir;
-  int? pressureMb;
+  double? pressureMb;
   double? pressureIn;
-  int? precipMm;
-  int? precipIn;
+  double? precipMm;
+  double? precipIn;
   int? humidity;
   int? cloud;
   double? feelslikeC;
@@ -100,10 +100,10 @@ class Current {
   double? heatindexC;
   double? heatindexF;
   double? dewpointC;
-  int? dewpointF;
-  int? visKm;
-  int? visMiles;
-  int? uv;
+  double? dewpointF;
+  double? visKm;
+  double? visMiles;
+  double? uv;
   double? gustMph;
   double? gustKph;
 
@@ -304,16 +304,16 @@ class Day {
   double? maxwindKph;
   double? totalprecipMm;
   double? totalprecipIn;
-  int? totalsnowCm;
+  double? totalsnowCm;
   double? avgvisKm;
-  int? avgvisMiles;
+  double? avgvisMiles;
   int? avghumidity;
   int? dailyWillItRain;
   int? dailyChanceOfRain;
   int? dailyWillItSnow;
   int? dailyChanceOfSnow;
   Condition? condition;
-  int? uv;
+  double? uv;
 
   Day(
       {this.maxtempC,
@@ -397,6 +397,8 @@ class Astro {
   String? moonset;
   String? moonPhase;
   int? moonIllumination;
+  int? isMoonUp;
+  int? isSunUp;
 
   Astro(
       {this.sunrise,
@@ -404,7 +406,9 @@ class Astro {
         this.moonrise,
         this.moonset,
         this.moonPhase,
-        this.moonIllumination});
+        this.moonIllumination,
+        this.isMoonUp,
+        this.isSunUp});
 
   Astro.fromJson(Map<String, dynamic> json) {
     sunrise = json['sunrise'];
@@ -413,6 +417,8 @@ class Astro {
     moonset = json['moonset'];
     moonPhase = json['moon_phase'];
     moonIllumination = json['moon_illumination'];
+    isMoonUp = json['is_moon_up'];
+    isSunUp = json['is_sun_up'];
   }
 
   Map<String, dynamic> toJson() {
@@ -423,6 +429,8 @@ class Astro {
     data['moonset'] = moonset;
     data['moon_phase'] = moonPhase;
     data['moon_illumination'] = moonIllumination;
+    data['is_moon_up'] = isMoonUp;
+    data['is_sun_up'] = isSunUp;
     return data;
   }
 }
@@ -438,10 +446,11 @@ class Hour {
   double? windKph;
   int? windDegree;
   String? windDir;
-  int? pressureMb;
+  double? pressureMb;
   double? pressureIn;
   double? precipMm;
   double? precipIn;
+  double? snowCm;
   int? humidity;
   int? cloud;
   double? feelslikeC;
@@ -456,46 +465,45 @@ class Hour {
   int? chanceOfRain;
   int? willItSnow;
   int? chanceOfSnow;
-  int? visKm;
-  int? visMiles;
+  double? visKm;
+  double? visMiles;
   double? gustMph;
   double? gustKph;
-  int? uv;
 
-  Hour(
-      {this.timeEpoch,
-        this.time,
-        this.tempC,
-        this.tempF,
-        this.isDay,
-        this.condition,
-        this.windMph,
-        this.windKph,
-        this.windDegree,
-        this.windDir,
-        this.pressureMb,
-        this.pressureIn,
-        this.precipMm,
-        this.precipIn,
-        this.humidity,
-        this.cloud,
-        this.feelslikeC,
-        this.feelslikeF,
-        this.windchillC,
-        this.windchillF,
-        this.heatindexC,
-        this.heatindexF,
-        this.dewpointC,
-        this.dewpointF,
-        this.willItRain,
-        this.chanceOfRain,
-        this.willItSnow,
-        this.chanceOfSnow,
-        this.visKm,
-        this.visMiles,
-        this.gustMph,
-        this.gustKph,
-        this.uv});
+  Hour({this.timeEpoch,
+    this.time,
+    this.tempC,
+    this.tempF,
+    this.isDay,
+    this.condition,
+    this.windMph,
+    this.windKph,
+    this.windDegree,
+    this.windDir,
+    this.pressureMb,
+    this.pressureIn,
+    this.precipMm,
+    this.precipIn,
+    this.snowCm,
+    this.humidity,
+    this.cloud,
+    this.feelslikeC,
+    this.feelslikeF,
+    this.windchillC,
+    this.windchillF,
+    this.heatindexC,
+    this.heatindexF,
+    this.dewpointC,
+    this.dewpointF,
+    this.willItRain,
+    this.chanceOfRain,
+    this.willItSnow,
+    this.chanceOfSnow,
+    this.visKm,
+    this.visMiles,
+    this.gustMph,
+    this.gustKph,
+  });
 
   Hour.fromJson(Map<String, dynamic> json) {
     timeEpoch = json['time_epoch'];
@@ -514,6 +522,7 @@ class Hour {
     pressureIn = json['pressure_in'];
     precipMm = json['precip_mm'];
     precipIn = json['precip_in'];
+    snowCm = json['snow_cm'];
     humidity = json['humidity'];
     cloud = json['cloud'];
     feelslikeC = json['feelslike_c'];
@@ -532,7 +541,7 @@ class Hour {
     visMiles = json['vis_miles'];
     gustMph = json['gust_mph'];
     gustKph = json['gust_kph'];
-    uv = json['uv'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -553,6 +562,7 @@ class Hour {
     data['pressure_in'] = pressureIn;
     data['precip_mm'] = precipMm;
     data['precip_in'] = precipIn;
+    data['snow_cm'] = snowCm;
     data['humidity'] = humidity;
     data['cloud'] = cloud;
     data['feelslike_c'] = feelslikeC;
@@ -571,7 +581,7 @@ class Hour {
     data['vis_miles'] = visMiles;
     data['gust_mph'] = gustMph;
     data['gust_kph'] = gustKph;
-    data['uv'] = uv;
+
     return data;
   }
 }

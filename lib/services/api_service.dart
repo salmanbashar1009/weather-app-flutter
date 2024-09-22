@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:weather_app_1/consts/urls.dart';
 import 'package:weather_app_1/models/weather_model.dart';
@@ -19,6 +17,7 @@ class ApiService {
         throw "No Data found";
       }
     } catch (e) {
+      print(e.toString());
       throw e.toString();
     }
   }
