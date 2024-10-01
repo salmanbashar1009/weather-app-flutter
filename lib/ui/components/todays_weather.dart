@@ -14,7 +14,7 @@ class TodaysWeather extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: [
         WeatherBg(
-            weatherType: WeatherType.heavyRainy,
+            weatherType: WeatherType.cloudyNight ,
             width: MediaQuery.of(context).size.width,
             height: 310),
         SizedBox(
@@ -59,7 +59,7 @@ class TodaysWeather extends StatelessWidget {
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle, color: Colors.white10),
                     child: Image.network(
-                        "https:${weatherModel?.current?.condition?.icon}"),
+                        "https:${weatherModel?.current?.condition?.icon}",),
                   ),
                   const Spacer(),
                   Column(

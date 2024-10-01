@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app_1/models/weather_model.dart';
 import 'package:weather_app_1/services/api_service.dart';
+import 'package:weather_app_1/ui/components/hourly_weather_list_item.dart';
 import 'package:weather_app_1/ui/components/todays_weather.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,6 +32,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     TodaysWeather(
                       weatherModel: weatherModel,
+                    ),
+                    const SizedBox(height: 10,),
+                    const Text("Weather by Hours", style: TextStyle(color: Colors.white,fontSize: 24),),
+                    const SizedBox(height: 10,),
+                    SizedBox(
+                      height: 150,
+                      width: double.infinity,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: weatherModel?.forecast?.forecastday?[0].hour?.length ?? 0,
+                        itemBuilder: (context, index){
+                          Hour? hour = weatherModel?.forecast?.forecastday?[0].hour?[index];
+                          return HourlyWeatherListItem(hour: hour,) ;
+                        },
+                      ),
                     ),
                   ],
                 ),
