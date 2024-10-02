@@ -11,12 +11,9 @@ class MyWeatherApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return   MaterialApp(
+    return   const MaterialApp(
       title: "My Weather App",
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
-      ),
       home: HomeScreen(),
     );
   }
