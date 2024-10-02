@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app_1/models/weather_model.dart';
 import 'package:weather_app_1/services/api_service.dart';
+import 'package:weather_app_1/ui/components/future_forcast_list_item.dart';
 import 'package:weather_app_1/ui/components/hourly_weather_list_item.dart';
 import 'package:weather_app_1/ui/components/todays_weather.dart';
 
@@ -45,6 +46,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index){
                           Hour? hour = weatherModel?.forecast?.forecastday?[0].hour?[index];
                           return HourlyWeatherListItem(hour: hour,) ;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 10,),
+                    const Text("Next 7 days weather", style: TextStyle(color: Colors.white,fontSize: 24),),
+                    const SizedBox(height: 10,),
+                    Expanded(
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: weatherModel?.forecast?.forecastday?.length,
+                        itemBuilder: (context, index){
+                          Forecastday? forecastday = weatherModel?.forecast?.forecastday?[index];
+                          return FutureForcastListitem(forecastday: forecastday ,);
                         },
                       ),
                     ),
